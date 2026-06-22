@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Password</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <h2> 🔐 Password Generator</h2>
+
+            <div class="password-section">
+                <!-- <input type="password"> -->
+                <input type="text" readonly id="password" placeholder="Click Generate Password" />
+                <button id="copyBtn">📋 Copy</button>
+            </div>
+
+            <div class="settings-section">
+                <!-- <input type="number"> -->
+                <div class="length-container">
+                    <span>Length</span>
+                    <span id="lengthValue">12</span>
+                </div>
+
+                <input type="range" id="length" min="8" max="30" value="12">
+
+                <label>
+                    <input type="checkbox" id="uppercase">
+                    Uppercase
+                </label>
+                <label>
+                    <input type="checkbox" id="lowercase">
+                    Lowercase
+                </label>
+                <label>
+                    <input type="checkbox" id="numbers">
+                    Numbers
+                </label>
+                <label>
+                    <input type="checkbox" id="symbols">
+                    Symbols
+                </label>
+            </div>
+
+            <div class="actions-section">
+                <div class="strength">
+                    <h4>Password Strength: </h4>
+                    <p id="strength"></p>
+                </div>
+
+                <div class="reason">
+                    <h4>Reason: </h4>
+                    <p id="reason"></p>
+                </div>
+
+                <button id="generateBtn">
+                    Generate Password
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./first.js"></script>
+</body>
+
+</html>
