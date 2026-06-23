@@ -81,6 +81,15 @@ function generatePassword() {
     strength.classList.add("strong");
     reason.innerText = "Good security";
   }
+
+  arr.push(password);
+
+  if (arr.length > 5) {
+    arr.shift();
+  }
+
+  localStorage.setItem("passwordHistory", JSON.stringify(arr));
+  renderHistory();
 }
 // generatePassword();
 
@@ -109,3 +118,17 @@ copyBtn.addEventListener("click", async () => {
     console.log("Copy failed", error);
   }
 });
+
+const arr = JSON.parse(localStorage.getItem("passwordHistory")) || [];
+const history = document.querySelector(".history");
+
+function renderHistory() {
+  history.innerHTML = "";
+  arr.forEach((item, index) => {
+    const p = document.createElement("p");
+    p.innerText = `${index + 1}. ${item}`;
+    history.appendChild(p);
+  });
+}
+renderHistory();
+
