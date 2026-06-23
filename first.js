@@ -132,3 +132,9 @@ function renderHistory() {
 }
 renderHistory();
 
+const clearHistory = document.querySelector(".clearHistory");
+clearHistory.addEventListener("click", () => {
+  arr.length = 0;
+  localStorage.removeItem("passwordHistory");
+  renderHistory();
+});
