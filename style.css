@@ -50,6 +50,7 @@ body {
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .settings-section {
@@ -123,5 +124,18 @@ body {
   cursor: pointer;
   transition: 0.3s;
   margin-top: 5px;
+  transition: 0.3s;
 }
+
+.clearHistory:hover {
+  transform: translateY(-2px);
+}
+
+#toggleBtn {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  transition: 0.3s;
+}
+
 

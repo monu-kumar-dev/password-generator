@@ -138,3 +138,16 @@ clearHistory.addEventListener("click", () => {
   localStorage.removeItem("passwordHistory");
   renderHistory();
 });
+
+const toggleBtn = document.getElementById("toggleBtn");
+
+toggleBtn.addEventListener("click", () => {
+
+  if (passwordInput.type === "password") {
+    passwordInput.type = "text";
+    toggleBtn.innerText = "🙈 Hide";
+  } else {
+    passwordInput.type = "password";
+    toggleBtn.innerText = "👁 Show";
+  }
+});
