@@ -18,11 +18,12 @@ function generatePassword() {
   let allowedChars = "";
   strength.innerText = "";
   reason.innerText = "";
-  let score = 0;
   const uppercasePassword = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const lowercasePassword = "abcdefghijklmnopqrstuvwxyz";
   const numberPassword = "0123456789";
   const symbolPassword = "!@#$%^&*";
+
+  let score = 0;
 
   if (uppercaseCheckbox.checked) {
     allowedChars += uppercasePassword;
@@ -67,20 +68,22 @@ function generatePassword() {
 
   if (score <= 2) {
     strength.innerText = "weak";
-    strength.classList.remove();
+    strength.classList.remove("weak", "medium", "strong");
     strength.classList.add("weak");
     reason.innerText = "Easy to crack";
   } else if (score <= 4) {
     strength.innerText = "medium";
-    strength.classList.remove();
+    strength.classList.remove("weak", "medium", "strong");
     strength.classList.add("medium");
     reason.innerText = "Acceptable but can be improved";
   } else {
     strength.innerText = "strong";
-    strength.classList.remove();
+    strength.classList.remove("weak", "medium", "strong");
     strength.classList.add("strong");
     reason.innerText = "Good security";
   }
+
+  progressBarWidth(score);
 
   arr.push(password);
 
@@ -142,7 +145,6 @@ clearHistory.addEventListener("click", () => {
 const toggleBtn = document.getElementById("toggleBtn");
 
 toggleBtn.addEventListener("click", () => {
-
   if (passwordInput.type === "password") {
     passwordInput.type = "text";
     toggleBtn.innerText = "🙈 Hide";
@@ -151,3 +153,21 @@ toggleBtn.addEventListener("click", () => {
     toggleBtn.innerText = "👁 Show";
   }
 });
+
+const progressBar = document.getElementById("progress-bar");
+
+function progressBarWidth(score) {
+  let width = 0;
+  if (score <= 2) {
+    width = (score / 5) * 100;
+    progressBar.style.width = width + "%";
+    progressBar.style.background = "red";
+  } else if (score <= 4) {
+    width = (score / 5) * 100;
+    progressBar.style.width = width + "%";
+    progressBar.style.background = "orange";
+  } else {
+    progressBar.style.width = "100%";
+    progressBar.style.background = "green";
+  }
+}
