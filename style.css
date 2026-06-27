@@ -113,6 +113,10 @@ body {
   margin-bottom: 8px;
 }
 
+#strength {
+  margin-top: 12px;
+}
+
 .clearHistory {
   width: 40%;
   padding: 14px;
@@ -150,7 +154,8 @@ body {
   height: 10px;
   border-radius: 10px;
   background-color: #ddd;
-  overflow: hidden;
+  /* overflow: hidden; */
+  margin-top: 15px;
 }
 
 #progress-bar {

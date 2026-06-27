@@ -7,6 +7,8 @@ const passwordInput = document.getElementById("password");
 
 const lengthValue = document.getElementById("lengthValue");
 
+const progressBar = document.getElementById("progress-bar");
+
 bar.addEventListener("input", () => {
   lengthValue.innerText = bar.value;
 });
@@ -47,6 +49,8 @@ function generatePassword() {
 
   if (allowedChars.length === 0) {
     alert("please select at least one option");
+    score = 0;
+    progressBar.style.width = 0 + "%";
     return;
   }
 
@@ -153,8 +157,6 @@ toggleBtn.addEventListener("click", () => {
     toggleBtn.innerText = "👁 Show";
   }
 });
-
-const progressBar = document.getElementById("progress-bar");
 
 function progressBarWidth(score) {
   let width = 0;
