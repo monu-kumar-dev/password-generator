@@ -1,4 +1,4 @@
-const bar = document.getElementById("length");
+const lengthSlider = document.getElementById("length");
 const uppercaseCheckbox = document.getElementById("uppercase");
 const lowercaseCheckbox = document.getElementById("lowercase");
 const numberCheckbox = document.getElementById("numbers");
@@ -9,41 +9,42 @@ const lengthValue = document.getElementById("lengthValue");
 
 const progressBar = document.getElementById("progress-bar");
 
-bar.addEventListener("input", () => {
-  lengthValue.innerText = bar.value;
+lengthSlider.addEventListener("input", () => {
+  lengthValue.innerText = lengthSlider.value;
 });
 
 const strength = document.getElementById("strength");
 const reason = document.getElementById("reason");
 
+const UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
+const NUMBERS = "0123456789";
+const SYMBOLS = "!@#$%^&*";
+
 function generatePassword() {
   let allowedChars = "";
   strength.innerText = "";
   reason.innerText = "";
-  const uppercasePassword = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const lowercasePassword = "abcdefghijklmnopqrstuvwxyz";
-  const numberPassword = "0123456789";
-  const symbolPassword = "!@#$%^&*";
 
   let score = 0;
 
   if (uppercaseCheckbox.checked) {
-    allowedChars += uppercasePassword;
+    allowedChars += UPPERCASE;
     score += 1;
   }
 
   if (lowercaseCheckbox.checked) {
-    allowedChars += lowercasePassword;
+    allowedChars += LOWERCASE;
     score += 1;
   }
 
   if (numberCheckbox.checked) {
-    allowedChars += numberPassword;
+    allowedChars += NUMBERS;
     score += 1;
   }
 
   if (symbolCheckbox.checked) {
-    allowedChars += symbolPassword;
+    allowedChars += SYMBOLS;
     score += 1;
   }
 
@@ -57,7 +58,7 @@ function generatePassword() {
   // console.log(allowedChars);
 
   let password = "";
-  const passwordLength = Number(bar.value);
+  const passwordLength = Number(lengthSlider.value);
   for (let i = 0; i < passwordLength; i++) {
     const random = Math.floor(Math.random() * allowedChars.length);
     password += allowedChars[random];
@@ -70,6 +71,17 @@ function generatePassword() {
     score += 1;
   }
 
+  updateStrength(score);
+  progressBarWidth(score);
+  saveHistory(password);
+
+  // Reset password visibility
+  passwordInput.type = "password";
+  toggleBtn.innerText = "👁 Show";
+}
+// generatePassword();
+
+function updateStrength(score) {
   if (score <= 2) {
     strength.innerText = "weak";
     strength.classList.remove("weak", "medium", "strong");
@@ -86,11 +98,10 @@ function generatePassword() {
     strength.classList.add("strong");
     reason.innerText = "Good security";
   }
+}
 
-  progressBarWidth(score);
-
+function saveHistory(password) {
   arr.push(password);
-
   if (arr.length > 5) {
     arr.shift();
   }
@@ -98,7 +109,6 @@ function generatePassword() {
   localStorage.setItem("passwordHistory", JSON.stringify(arr));
   renderHistory();
 }
-// generatePassword();
 
 const generateBtn = document.getElementById("generateBtn");
 generateBtn.addEventListener("click", generatePassword);
@@ -159,17 +169,14 @@ toggleBtn.addEventListener("click", () => {
 });
 
 function progressBarWidth(score) {
-  let width = 0;
+  const width = (score / 5) * 100;
+  progressBar.style.width = width + "%";
+
   if (score <= 2) {
-    width = (score / 5) * 100;
-    progressBar.style.width = width + "%";
     progressBar.style.background = "red";
   } else if (score <= 4) {
-    width = (score / 5) * 100;
-    progressBar.style.width = width + "%";
     progressBar.style.background = "orange";
   } else {
-    progressBar.style.width = "100%";
     progressBar.style.background = "green";
   }
 }
